@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择你的出站英雄</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 动态背景粒子 -->
+    <canvas id="particles"></canvas>
+    
+    <!-- 大气渐变层 -->
+    <div class="atmosphere"></div>
+    
+    <!-- 主内容区 -->
+    <div class="content">
+        <!-- 标题区 -->
+        <header class="header">
+            <h1 class="title">选择你认为最无敌的人物</h1>
+            <p class="subtitle">点击英雄卡片查看详情，输入你的名字进行选择</p>
+        </header>
+        
+        <!-- 英雄卡片网格 -->
+        <section class="hero-grid">
+            <!-- 一怒压下 -->
+            <div class="hero-card" data-hero="一怒压下">
+                <div class="card-header">
+                    <img src="images/一怒压下.jpg" alt="一怒压下" class="hero-avatar">
+                    <div class="hero-info">
+                        <h2 class="hero-name">一怒压下</h2>
+                        <span class="version-badge version-hot">版本热门英雄</span>
+                    </div>
+                </div>
+                <div class="hero-details">
+                    <div class="detail-section">
+                        <h3><i class="fas fa-gamepad"></i> 主玩游戏</h3>
+                        <div class="game-tags">
+                            <span class="game-tag tag-main">诅咒之岛</span>
+                            <span class="game-tag tag-main">泰坦之路</span>
+                            <span class="game-tag tag-main">罗布乐思</span>
+                            <span class="game-tag tag-main">洛克王国：世界</span>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fas fa-user"></i> 英雄性格</h3>
+                        <p>性情温和，手法强劲</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 水晶龙 -->
+            <div class="hero-card" data-hero="水晶龙">
+                <div class="card-header">
+                    <img src="images/水晶龙.jpg" alt="水晶龙" class="hero-avatar">
+                    <div class="hero-info">
+                        <h2 class="hero-name">水晶龙</h2>
+                        <span class="version-badge version-strong">版本强势英雄</span>
+                    </div>
+                </div>
+                <div class="hero-details">
+                    <div class="detail-section">
+                        <h3><i class="fas fa-gamepad"></i> 主玩游戏</h3>
+                        <div class="game-tags">
+                            <span class="game-tag tag-main">罗布乐思</span>
+                            <span class="game-tag tag-main">洛克王国：世界</span>
+                        </div>
+                        <h3><i class="fas fa-gamepad"></i> 偶玩游戏</h3>
+                        <div class="game-tags">
+                            <span class="game-tag tag-occasional">诅咒之岛</span>
+                            <span class="game-tag tag-occasional">泰坦之路</span>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fas fa-user"></i> 英雄性格</h3>
+                        <p>有时暴躁，画画高手，喜玩休闲游戏</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 晚安 -->
+            <div class="hero-card" data-hero="晚安">
+                <div class="card-header">
+                    <img src="images/晚安.jpg" alt="晚安" class="hero-avatar">
+                    <div class="hero-info">
+                        <h2 class="hero-name">晚安</h2>
+                        <span class="version-badge version-dark">版本黑马</span>
+                    </div>
+                </div>
+                <div class="hero-details">
+                    <div class="detail-section">
+                        <h3><i class="fas fa-gamepad"></i> 主玩游戏</h3>
+                        <div class="game-tags">
+                            <span class="game-tag tag-main">诅咒之岛</span>
+                        </div>
+                        <h3><i class="fas fa-gamepad"></i> 偶玩游戏</h3>
+                        <div class="game-tags">
+                            <span class="game-tag tag-occasional">三角洲行动</span>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fas fa-user"></i> 英雄性格</h3>
+                        <p>颇帅，手法强劲，比较暴躁</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 愚人 -->
+            <div class="hero-card" data-hero="愚人">
+                <div class="card-header">
+                    <img src="images/愚人.jpg" alt="愚人" class="hero-avatar">
+                    <div class="hero-info">
+                        <h2 class="hero-name">愚人</h2>
+                        <span class="version-badge version-gold">人见人爱</span>
+                    </div>
+                </div>
+                <div class="hero-details">
+                    <div class="detail-section">
+                        <h3><i class="fas fa-gamepad"></i> 主玩游戏</h3>
+                        <div class="game-tags">
+                            <span class="game-tag tag-main">诅咒之岛</span>
+                        </div>
+                        <h3><i class="fas fa-gamepad"></i> 偶玩游戏</h3>
+                        <div class="game-tags">
+                            <span class="game-tag tag-occasional">三角洲行动</span>
+                            <span class="game-tag tag-occasional">王者荣耀</span>
+                            <span class="game-tag tag-occasional">超自然行动组</span>
+                            <span class="game-tag tag-occasional">洛克王国：世界</span>
+                        </div>
+                        <h3><i class="fas fa-gamepad"></i> 基本不玩</h3>
+                        <div class="game-tags">
+                            <span class="game-tag tag-barely">罗布乐思</span>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fas fa-user"></i> 英雄性格</h3>
+                        <p>人见人爱花见花开车见车载一见倾心惊为天人，涉猎极广，玩转互联网</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 输入区 -->
+        <section class="input-section">
+            <div class="input-container">
+                <input type="text" id="heroInput" placeholder="自己的名字（网名）" autocomplete="off">
+                <button id="submitBtn" class="submit-btn">
+                    <i class="fas fa-bolt"></i> 确认选择
+                </button>
+            </div>
+            <div id="message" class="message"></div>
+        </section>
+        
+        <!-- 提示区 -->
+        <footer class="footer">
+            <p>💡 提示：输入框只接受"一怒压下、水晶龙、晚安、愚人"四个名字</p>
+            <p>🎭 点击英雄卡片可展开查看详细信息</p>
+        </footer>
+    </div>
+    
+    <!-- 成功动画 -->
+    <div id="successOverlay" class="success-overlay">
+        <div class="success-content">
+            <i class="fas fa-crown"></i>
+            <h2>英雄已选定！</h2>
+            <p id="successText"></p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
