@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>选择你的出站英雄</title>
+    <title>选择你的出战英雄</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,19 +20,22 @@
         <!-- 标题区 -->
         <header class="header">
             <h1 class="title">选择你认为最无敌的人物</h1>
-            <p class="subtitle">点击英雄卡片查看详情，输入你的名字进行选择</p>
+            <p class="subtitle">点击英雄卡片展开详情，点击右侧按钮进行选择</p>
         </header>
         
-        <!-- 英雄卡片网格 -->
-        <section class="hero-grid">
+        <!-- 英雄卡片列表 -->
+        <section class="hero-list">
             <!-- 一怒压下 -->
             <div class="hero-card" data-hero="一怒压下">
-                <div class="card-header">
+                <div class="card-header" onclick="toggleCard(this)">
                     <img src="images/一怒压下.jpg" alt="一怒压下" class="hero-avatar">
                     <div class="hero-info">
                         <h2 class="hero-name">一怒压下</h2>
                         <span class="version-badge version-hot">版本热门英雄</span>
                     </div>
+                    <button class="select-btn" onclick="event.stopPropagation(); openModal('一怒压下')">
+                        <i class="fas fa-bolt"></i> 确认选择
+                    </button>
                 </div>
                 <div class="hero-details">
                     <div class="detail-section">
@@ -53,12 +56,15 @@
             
             <!-- 水晶龙 -->
             <div class="hero-card" data-hero="水晶龙">
-                <div class="card-header">
+                <div class="card-header" onclick="toggleCard(this)">
                     <img src="images/水晶龙.jpg" alt="水晶龙" class="hero-avatar">
                     <div class="hero-info">
                         <h2 class="hero-name">水晶龙</h2>
                         <span class="version-badge version-strong">版本强势英雄</span>
                     </div>
+                    <button class="select-btn" onclick="event.stopPropagation(); openModal('水晶龙')">
+                        <i class="fas fa-bolt"></i> 确认选择
+                    </button>
                 </div>
                 <div class="hero-details">
                     <div class="detail-section">
@@ -82,12 +88,15 @@
             
             <!-- 晚安 -->
             <div class="hero-card" data-hero="晚安">
-                <div class="card-header">
+                <div class="card-header" onclick="toggleCard(this)">
                     <img src="images/晚安.jpg" alt="晚安" class="hero-avatar">
                     <div class="hero-info">
                         <h2 class="hero-name">晚安</h2>
                         <span class="version-badge version-dark">版本黑马</span>
                     </div>
+                    <button class="select-btn" onclick="event.stopPropagation(); openModal('晚安')">
+                        <i class="fas fa-bolt"></i> 确认选择
+                    </button>
                 </div>
                 <div class="hero-details">
                     <div class="detail-section">
@@ -109,12 +118,15 @@
             
             <!-- 愚人 -->
             <div class="hero-card" data-hero="愚人">
-                <div class="card-header">
+                <div class="card-header" onclick="toggleCard(this)">
                     <img src="images/愚人.jpg" alt="愚人" class="hero-avatar">
                     <div class="hero-info">
                         <h2 class="hero-name">愚人</h2>
                         <span class="version-badge version-gold">人见人爱</span>
                     </div>
+                    <button class="select-btn" onclick="event.stopPropagation(); openModal('愚人')">
+                        <i class="fas fa-bolt"></i> 确认选择
+                    </button>
                 </div>
                 <div class="hero-details">
                     <div class="detail-section">
@@ -142,32 +154,32 @@
             </div>
         </section>
         
-        <!-- 输入区 -->
-        <section class="input-section">
-            <div class="input-container">
-                <input type="text" id="heroInput" placeholder="输入你自己的名字（网名即可）" autocomplete="off">
-                <button id="submitBtn" class="submit-btn">
-                    <i class="fas fa-bolt"></i> 确认选择
-                </button>
-            </div>
-            <div id="message" class="message"></div>
-        </section>
-        
-        <!-- 提示区 -->
+        <!-- 页脚 -->
         <footer class="footer">
-            <p>🎭 点击卡片可展开查看详细信息</p>
+            <p>💡 提示：输入框只接受"一怒压下、水晶龙、晚安、愚人"四个名字</p>
         </footer>
     </div>
     
-    <!-- 成功动画 -->
-    <div id="successOverlay" class="success-overlay">
-        <div class="success-content">
-            <i class="fas fa-crown"></i>
-            <h2>英雄已选定！</h2>
-            <p id="successText"></p>
+    <!-- 选择弹窗 -->
+    <div id="selectModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 class="modal-title">确认选择</h2>
+            <p class="modal-desc">你正在选择 <span id="modalHeroName" class="hero-name-highlight"></span> 作为最无敌的人物</p>
+            <div class="modal-input-group">
+                <input type="text" id="modalInput" placeholder="请输入你的名字" autocomplete="off">
+            </div>
+            <div id="modalMessage" class="modal-message"></div>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-cancel" onclick="closeModal()">取消</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmSelection()">
+                    <i class="fas fa-check"></i> 确认
+                </button>
+            </div>
         </div>
     </div>
     
     <script src="script.js"></script>
 </body>
 </html>
+
