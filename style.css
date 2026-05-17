@@ -1,0 +1,483 @@
+/* 基础重置和变量 */
+:root {
+    --bg: #0a0a0f;
+    --fg: #eae6df;
+    --muted: #706b63;
+    --accent: #e8a838;
+    --card: rgba(20, 20, 30, 0.85);
+    --border: rgba(232, 168, 56, 0.25);
+    --gold: #ffd700;
+    --hot: #ff6050;
+    --strong: #50b8ff;
+    --dark: #9b59b6;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Noto Sans SC', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 粒子画布 */
+#particles {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* 大气渐变 */
+.atmosphere {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 600px 400px at 15% 25%, rgba(232,168,56,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 500px at 85% 75%, rgba(232,168,56,0.05) 0%, transparent 70%),
+        radial-gradient(ellipse 800px 300px at 50% 50%, rgba(30,25,15,0.5) 0%, transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* 标题区 */
+.header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.title {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 3.5rem;
+    background: linear-gradient(135deg, var(--accent), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 15px;
+    text-shadow: 0 0 40px rgba(232,168,56,0.3);
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+@keyframes titleGlow {
+    from { text-shadow: 0 0 40px rgba(232,168,56,0.3); }
+    to { text-shadow: 0 0 60px rgba(232,168,56,0.5), 0 0 100px rgba(232,168,56,0.2); }
+}
+
+/* 英雄卡片网格 */
+.hero-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.hero-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 10%, var(--accent) 50%, transparent 90%);
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.hero-card:hover {
+    border-color: rgba(232, 168, 56, 0.5);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(232, 168, 56, 0.15);
+}
+
+.hero-card:hover::before {
+    opacity: 1;
+}
+
+.hero-card.active {
+    border-color: var(--accent);
+    box-shadow: 0 0 60px rgba(232, 168, 56, 0.2), 0 0 120px rgba(232, 168, 56, 0.08);
+    transform: translateY(-5px);
+}
+
+.hero-card.active::before {
+    opacity: 1;
+}
+
+.hero-card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* 卡片头部 */
+.card-header {
+    display: flex;
+    align-items: center;
+    padding: 25px;
+    position: relative;
+}
+
+.hero-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--border);
+    object-fit: cover;
+    margin-right: 20px;
+    transition: all 0.3s;
+}
+
+.hero-card.active .hero-avatar {
+    border-color: var(--accent);
+    box-shadow: 0 0 30px rgba(232,168,56,0.3);
+}
+
+.hero-info {
+    flex: 1;
+}
+
+.hero-name {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 1.8rem;
+    color: var(--fg);
+    margin-bottom: 8px;
+}
+
+.version-badge {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: 'Noto Sans SC', sans-serif;
+}
+
+.version-hot {
+    background: rgba(255,80,60,0.12);
+    border: 1px solid rgba(255,80,60,0.3);
+    color: var(--hot);
+}
+
+.version-strong {
+    background: rgba(60,180,255,0.12);
+    border: 1px solid rgba(60,180,255,0.3);
+    color: var(--strong);
+}
+
+.version-dark {
+    background: rgba(155,89,182,0.12);
+    border: 1px solid rgba(155,89,182,0.3);
+    color: var(--dark);
+}
+
+.version-gold {
+    background: rgba(255,215,0,0.12);
+    border: 1px solid rgba(255,215,0,0.3);
+    color: var(--gold);
+}
+
+/* 展开详情区 */
+.hero-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.5s ease,
+                padding 0.5s ease;
+    opacity: 0;
+    padding: 0 25px;
+}
+
+.hero-card.active .hero-details {
+    max-height: 400px;
+    opacity: 1;
+    padding: 0 25px 25px;
+}
+
+.detail-section {
+    margin-bottom: 20px;
+}
+
+.detail-section h3 {
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.detail-section h3 i {
+    font-size: 0.9rem;
+}
+
+.game-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.game-tag {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    border: 1px solid;
+    white-space: nowrap;
+    transition: all 0.3s;
+}
+
+.tag-main {
+    background: rgba(232,168,56,0.14);
+    border-color: rgba(232,168,56,0.35);
+    color: #e8a838;
+}
+
+.tag-occasional {
+    background: rgba(120,160,140,0.1);
+    border-color: rgba(120,160,140,0.3);
+    color: #8fb8a8;
+}
+
+.tag-barely {
+    background: rgba(130,130,130,0.08);
+    border-color: rgba(130,130,130,0.2);
+    color: #888;
+}
+
+.detail-section p {
+    line-height: 1.6;
+    color: #ccc;
+}
+
+/* 输入区 */
+.input-section {
+    max-width: 600px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    align-items: stretch;
+}
+
+#heroInput {
+    flex: 1;
+    padding: 18px 25px;
+    background: rgba(20, 20, 30, 0.9);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    color: var(--fg);
+    font-size: 1.1rem;
+    font-family: 'Noto Sans SC', sans-serif;
+    outline: none;
+    transition: all 0.3s;
+}
+
+#heroInput::placeholder {
+    color: #666;
+    font-style: italic;
+}
+
+#heroInput:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 30px rgba(232,168,56,0.15);
+}
+
+.submit-btn {
+    padding: 18px 30px;
+    background: linear-gradient(135deg, var(--accent), #c88a20);
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(232,168,56,0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(-1px);
+}
+
+.message {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s;
+    background: rgba(20, 20, 30, 0.7);
+    border: 1px solid transparent;
+}
+
+.message.narcissist {
+    background: rgba(255, 80, 60, 0.1);
+    border-color: rgba(255, 80, 60, 0.3);
+    color: var(--hot);
+}
+
+.message.no-confidence {
+    background: rgba(60, 180, 255, 0.1);
+    border-color: rgba(60, 180, 255, 0.3);
+    color: var(--strong);
+}
+
+.message.great-choice {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.3);
+    color: var(--gold);
+}
+
+.message.unknown {
+    background: rgba(155, 89, 182, 0.1);
+    border-color: rgba(155, 89, 182, 0.3);
+    color: var(--dark);
+}
+
+/* 页脚 */
+.footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+/* 成功动画叠加层 */
+.success-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+}
+
+.success-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.success-content {
+    text-align: center;
+    transform: scale(0.8);
+    transition: transform 0.5s;
+}
+
+.success-overlay.active .success-content {
+    transform: scale(1);
+}
+
+.success-content i {
+    font-size: 5rem;
+    color: var(--gold);
+    margin-bottom: 20px;
+    animation: crownBounce 0.6s ease infinite alternate;
+}
+
+.success-content h2 {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 3rem;
+    color: var(--gold);
+    margin-bottom: 15px;
+}
+
+.success-content p {
+    font-size: 1.3rem;
+    color: #ccc;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+@keyframes crownBounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .input-container {
+        flex-direction: column;
+    }
+    
+    .submit-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .content {
+        padding: 20px 15px;
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+    
+    .hero-avatar {
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
+    }
+    
+    .hero-name {
+        font-size: 1.5rem;
+    }
+}
